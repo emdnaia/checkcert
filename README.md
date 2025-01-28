@@ -1,13 +1,12 @@
 #  Checkcert
 
-v0001
+v0002
 
 A) add domains on top
 B) it loops over them and writes expiration to a file you can read from
 
-- create file on `/usr/local/chheckcert.sh`
-- make it executable ` 
-
+- create the script file and make it executable
+ `touch /usr/local/chheckcert.sh && chmod +x /usr/local/chheckcert.sh`
 ```
 #!/bin/bash
 
@@ -131,9 +130,9 @@ chmod "$FILE_PERMISSIONS" "$CACHE_FILE"
 log "Cache updated: $CACHE_FILE"
 ```
 - results are stored at `/usr/local/share/ssl_expiration/ssl_expiration_report.txt`
-- you can just read from that file at your .profile on login
+- you can just read from that file at your .profile on login for whatever user
 ```
-if [ -f "" ]; then
-    cat "/home/dw7/.ssl_expiration"
+if [ -f "/usr/local/share/ssl_expiration/ssl_expiration_report.txt" ]; then
+    cat "/usr/local/share/ssl_expiration/ssl_expiration_report.txt"
 fi
 ```
