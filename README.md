@@ -1,6 +1,6 @@
-#  Checkcert
+# checkcert
 
-v0002
+v0003 OpenBSD
 
 A) add domains on top
 B) it loops over them and writes expiration to a file you can read from
@@ -22,8 +22,8 @@ CACHE_FILE="$OUTPUT_DIR/ssl_expiration_cache.txt"
 LOG_FILE="/var/log/ssl_expiration.log"
 
 # Default permissions for the output directory and file
-DIR_PERMISSIONS=755
-FILE_PERMISSIONS=644
+DIR_PERMISSIONS=700
+FILE_PERMISSIONS=600
 
 # Date format for OpenBSD's `date`
 DATE_FORMAT="%b %d %H:%M:%S %Y %Z"
@@ -135,4 +135,9 @@ log "Cache updated: $CACHE_FILE"
 if [ -f "/usr/local/share/ssl_expiration/ssl_expiration_report.txt" ]; then
     cat "/usr/local/share/ssl_expiration/ssl_expiration_report.txt"
 fi
+```
+- add a cronjob via `crontab -e`
+- run it at any interval you like: 2 weeks at 3:30
+```
+30 3 */14 * * /bin/ksh /usr/local/bin/checkcert.sh
 ```
